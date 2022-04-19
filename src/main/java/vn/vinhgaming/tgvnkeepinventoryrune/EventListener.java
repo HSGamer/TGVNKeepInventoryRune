@@ -19,11 +19,10 @@ public class EventListener implements Listener {
         TGVNKeepInventoryRune.getItemRune().returnInventory(event.getPlayer());
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public static void onClick(InventoryClickEvent event) {
         // Viết xong câu if này tôi chỉ muốn tự sát thôi
-        if (!event.isCancelled() // Nếu trước đó đã bị cancelled bởi plugin khác thì dẹp đi là vừa
-                && (event.getAction() == InventoryAction.SWAP_WITH_CURSOR)
+        if (event.getAction() == InventoryAction.SWAP_WITH_CURSOR
                 && TGVNKeepInventoryRune.getItemRune().checkRune(event.getCursor())
                 && event.getCurrentItem() != null // Kiểm tra xem có null không trước khi getType().name(), để không dính NullPointerException
                 && TGVNKeepInventoryRune.getItemRune().isWhitelisted(event.getCurrentItem().getType().name())) {
