@@ -2,13 +2,14 @@ package vn.vinhgaming.tgvnkeepinventoryrune;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
 public class ConfigManager {
     private static FileConfiguration config;
     public static void init() {
-        TGVNKeepInventoryRune plugin = TGVNKeepInventoryRune.getInstance();
+        TGVNKeepInventoryRune plugin = JavaPlugin.getPlugin(TGVNKeepInventoryRune.class);
         plugin.saveDefaultConfig();
         plugin.reloadConfig();
         config = plugin.getConfig();

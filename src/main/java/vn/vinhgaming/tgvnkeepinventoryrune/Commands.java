@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import vn.vinhgaming.tgvnkeepinventoryrune.rune.Rune;
 
 import java.util.Locale;
@@ -72,7 +73,7 @@ public class Commands implements CommandExecutor {
                 sender.sendMessage(ChatColor.GREEN + "Configuration reloaded.");
                 return true;
             case "help":
-                sender.sendMessage(Utils.translate("&f&lTG&c&lVN&aKeepInventoryRune &ev" + TGVNKeepInventoryRune.getInstance().getDescription().getVersion() + " by VinhGaming"));
+                sender.sendMessage(Utils.translate("&f&lTG&c&lVN&aKeepInventoryRune &ev" + JavaPlugin.getPlugin(TGVNKeepInventoryRune.class).getDescription().getVersion() + " by VinhGaming"));
                 sender.sendMessage(Utils.translate("&a/kir give <inventory/item> [amount] [playername] &eGive rune to player"));
                 sender.sendMessage(Utils.translate("&a/kir removeprotection|rp &eRemove ItemRune protection status from item in your main hand"));
                 sender.sendMessage(Utils.translate("&a/kir reload &eReload configuration"));
