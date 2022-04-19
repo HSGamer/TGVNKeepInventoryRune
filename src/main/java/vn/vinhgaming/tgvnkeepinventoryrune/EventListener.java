@@ -86,6 +86,6 @@ public class EventListener implements Listener {
                 event.getDrops().remove(itemStack);
             }
         }
-        if (weHaveSomethingToReturn) itemRune.addInventory(event.getEntity().getName(), contents);
+        if (weHaveSomethingToReturn) itemRune.addInventory(player, contents);
     }
 }

@@ -6,15 +6,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import vn.vinhgaming.tgvnkeepinventoryrune.ConfigManager;
 import vn.vinhgaming.tgvnkeepinventoryrune.Utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ItemRune extends Rune {
     String protectedLore;
-    Map<String, ItemStack[]> invList;
+    Map<UUID, ItemStack[]> invList;
     List<String> whitelistedMaterial;
+
     public void init(String material, String name, List<String> lore, String protectedLore, List<String> whitelistedMaterial) {
         this.whitelistedMaterial = whitelistedMaterial;
         this.protectedLore = Utils.translate(protectedLore);
@@ -24,6 +22,7 @@ public class ItemRune extends Rune {
 
     /**
      * Check if item contain the defined lore
+     *
      * @param item The item to check
      * @return true false, what else?
      */
@@ -50,15 +49,15 @@ public class ItemRune extends Rune {
         return item;
     }
 
-    public void addInventory(String player, ItemStack[] contents) {
-        invList.put(player, contents);
+    public void addInventory(Player player, ItemStack[] contents) {
+        invList.put(player.getUniqueId(), contents);
     }
 
     public void returnInventory(Player player) {
-        if (!invList.containsKey(player.getName())) return;
-        player.getInventory().setContents(invList.get(player.getName()));
+        ItemStack[] contents = invList.remove(player.getUniqueId());
+        if (contents == null) return;
+        player.getInventory().setContents(contents);
         player.sendMessage(ConfigManager.getMessage("ItemRuneUsed"));
-        invList.remove(player.getName());
     }
 
     public boolean isWhitelisted(String name) {
